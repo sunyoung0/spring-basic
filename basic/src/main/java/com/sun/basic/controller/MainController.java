@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MainController {
 	
+	// GET localhost:8080/
 	@GetMapping("/")
 	public String getMethod() {
 		return "get method";
