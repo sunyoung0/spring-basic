@@ -1,5 +1,7 @@
 package com.sun.basic.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -78,7 +80,7 @@ public class MainController {
 	@PostMapping("/request-body")
 	public String postRequestBody(
 		// @RequestBody String requestBody
-		@RequestBody PostRequestBodyDto requestBody
+		@RequestBody @Valid PostRequestBodyDto requestBody
 	)	{
 		return "입력한 Request Body는 " + requestBody.getName() + "입니다.";
 	}
