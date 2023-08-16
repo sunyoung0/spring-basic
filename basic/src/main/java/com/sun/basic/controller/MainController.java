@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -115,5 +116,22 @@ public class MainController {
 	public String validateJwt(@RequestParam("jwt") String jwt) {
 		String subject = jwtProvider.validate(jwt);
 		return subject;
+	}
+
+	@PostMapping("/principle")
+	public String principle (@AuthenticationPrincipal String subject){
+		return "토큰에 포함된 subject는 " + subject + "입니다.";
+	}
+
+	@GetMapping("/encode-password/{password}")
+	public String encodePassword(@PathVariable("password") String password) {
+		String encodedPassword = mainService.getPasswordEncoding(password);
+		return encodedPassword;
+	}
+
+	@PostMapping("/auth/match")
+	public boolean isMatched(@RequestParam("password") String password, @RequestParam("encodedPassword") String encodedPassword){
+		boolean isPasswordMatch = mainService.isPasswordMatch(password, encodedPassword);
+		return isPasswordMatch;
 	}
 }

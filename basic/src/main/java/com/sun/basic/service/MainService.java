@@ -5,4 +5,7 @@ public interface MainService {
 	public String hello();
 
 	public String getRepository();
+
+	public String getPasswordEncoding(String password);
+	boolean isPasswordMatch(String password, String encodedPassword);
 }
